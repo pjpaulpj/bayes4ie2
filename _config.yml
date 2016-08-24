@@ -1,17 +1,17 @@
 # Built with Jekyll 3.2.0
 
 # Setup
-title:               Ed.
-tagline:             'A Jekyll theme for minimal editions'
-description:         'Ed is a Jekyll theme designed for textual editors based on minimal computing principles, and focused on legibility and flexibility.'
-url:                 'http://elotroalex.github.io'
+title:               Bayes4ie
+tagline:             'A gentle(ish) introduction to the use of Bayesian analysis for impact evaluations'
+description:         'Site based on the Ed theme.'
+url:                 'http://dougj892.github.io'
 baseurl:             '/bayes4ie2'
 
 # About/contact
 author:
-  name:              Alex Gil
-  url:               https://twitter.com/elotroalex
-  email:             colibri.alex@gmail.com
+  name:              Doug Johnson
+  url:               https://twitter.com/dougj8921
+  email:             dougj892@gmail.com
 
 # Permalinks
 
@@ -37,6 +37,8 @@ kramdown:
   toc_levels:     1..6
   smart_quotes:   lsquo,rsquo,ldquo,rdquo
   enable_coderay: false
+  input: GFM
+  syntax_highlighter: rouge
 
 # Custom vars
 version:             0.0.6
