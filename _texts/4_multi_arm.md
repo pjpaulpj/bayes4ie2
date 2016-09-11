@@ -5,19 +5,16 @@ date: 2016-05-22 14:40:45
 categories: jekyll update
 ---
 
-
-
-## A Motivating Example
 I am currently involved in a five arm RCT for a client here in India.  The main purpose of this evaluation is help the client, an NGO, determine which of the five interventions they should drop and which they should continue to implement.  In order to make this decision, the client wants to know the probability of each treatment arm having the largest effect.  Unfortunately, it's hard to give a straight answer to that question using a frequentist approach.  We can answer questions like "what is the probability that we would see data this extreme if treatment arm 1 actually has no effect" or "what is the probability that we would see data as extreme as this if treatment arm 1 and treatment arm 2 actually have the same effect" but it's very difficult to estimate the probability of each treatment arm having the largest effect.
 
-## Step 1: Generate Some Data
-In future blog posts, I hope to use real client data to demonstrate this approach but for now let's start with some fake data.  To generate some fake data, I assume the true data generating process for the RCT is...
+As we'll see, Bayesian inference allows us to directly answer the client's question.
+
+## Generate some fake data
+Unfortunately, I can't share real data from this evaluation so I will generate some fake data instead. To generate some fake data, I assume the true data generating process for the RCT is...
 
 $$ y_i \sim N(\tau_{j[i]},\sigma_y^2) $$
 
-Where i indexes households, j indexes treatment arms, and j = 0 indicates the control group. I pick arbitrary values for the parameters.  The code for generating this data in Python is included below but again, don't worry if the details don't make sense. 
-
-*Note: If you don't want to go through the code, you can skip down until "Step 3"*
+Where i indexes households, j indexes treatment arms, and j = 0 indicates the control group. I pick arbitrary values for the parameters.  The code for generating this data in Python is included below. 
 
 
 ```python
@@ -57,12 +54,12 @@ for size in size_arms:
     start = end
 ```
 
-![](/assets/mult_arm_dist.png)
+![](/assets/test_dist.png)
 
 This appears to be about what we would expect give our effect sizes.
 
-## Step 2: Fit the Data Using Stan
-Great.  We've generated some data.  Now we use Stan, a special purpose probabilistic programming language, to fit that data using a Bayesian hierarchical model.  I'm going to use a model very similar to the data generating model to fit the data.  This is cheating a little bit, but it makes things a little simpler.
+## Define the model in Stan and pass 
+For this example. I'm going to use a model very similar to the data generating model to fit the data.  This is cheating a little bit, but it makes things a little simpler.
 
 
 ```python
@@ -99,28 +96,8 @@ stan_data = {'N': sum(size_arms),
 fit = pystan.stan(model_code=stan_code, data=stan_data, iter=1000, chains=4)
 ```
 
-    /Users/douglasjohnson/anaconda/lib/python3.5/multiprocessing/reduction.py:50: UserWarning: Pickling fit objects is an experimental feature!
-    The relevant StanModel instance must be pickled along with this fit object.
-    When unpickling the StanModel must be unpickled first.
-      cls(buf, protocol).dump(obj)
-    /Users/douglasjohnson/anaconda/lib/python3.5/multiprocessing/reduction.py:50: UserWarning: Pickling fit objects is an experimental feature!
-    The relevant StanModel instance must be pickled along with this fit object.
-    When unpickling the StanModel must be unpickled first.
-      cls(buf, protocol).dump(obj)
-    /Users/douglasjohnson/anaconda/lib/python3.5/multiprocessing/reduction.py:50: UserWarning: Pickling fit objects is an experimental feature!
-    The relevant StanModel instance must be pickled along with this fit object.
-    When unpickling the StanModel must be unpickled first.
-      cls(buf, protocol).dump(obj)
-    /Users/douglasjohnson/anaconda/lib/python3.5/multiprocessing/reduction.py:50: UserWarning: Pickling fit objects is an experimental feature!
-    The relevant StanModel instance must be pickled along with this fit object.
-    When unpickling the StanModel must be unpickled first.
-      cls(buf, protocol).dump(obj)
-
-
-## Step 3: Use the Posterior to Answer the Client's Question
-After fitting our model, the final output is a set of draws from the "posterior" distribution of our parameters. That is, we get a big list each element of which is a draw from our estimated distribution of the parameters.  This is a much richer output than for Stata's "regress" command which only gives point estimates and an estimated covariance matrix for our parameters. 
-
-Having access to the complete parameter distribution allows us to perform rich anlaysis on the parameters. For example, for each draw from the posterior distribution, we can look at which of the arms has the largest effect (i.e. which element of the vector $\tau_j$ is the largest).  This gives us the probability that each of the treatment arms is the "best" -- what the client originally wanted.  
+## Perform inference on samples form the posterior to answer the client's question
+Again, as in previous examples, having access to the complete posterior distribution allows us to perform rich anlaysis on the parameters. For example, for each draw from the posterior distribution, we can look at which of the arms has the largest effect (i.e. which element of the vector $\tau_j$ is the largest).  This gives us the probability that each of the treatment arms is the "best" -- what the client originally wanted.  
 
 
 ```python
@@ -135,8 +112,6 @@ results['max'].value_counts()/2000
 ```
 
 
-
-
     3    0.6285
     2    0.1850
     1    0.1110
@@ -148,10 +123,3 @@ results['max'].value_counts()/2000
 
 
 Voila!  We see that our model estimates treatment arm 3 (the actual best arm) as being the best with 62.6% probability.  Of course, we cheated a little by using a data generating model that was the same as our estimation model.
-
-The goal of this post was to provide an example in which Bayesian analysis can answer a question that the client might have that frequentist analysis can't.  In future posts, I hope to show some other ways that Bayesian analysis might be useful for our work.  
-
-
-```python
-
-```
