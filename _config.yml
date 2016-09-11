@@ -4,8 +4,8 @@
 title:               Bayes4ie
 tagline:             'A gentle(ish) introduction to the use of Bayesian analysis for impact evaluations'
 description:         'Site based on the Ed theme.'
-url:                 'https://dougj892.github.io/bayes4ie2'
-baseurl:             ''
+url:                 'https://dougj892.github.io'
+baseurl:             '/bayes4ie2'
 
 # About/contact
 author:
