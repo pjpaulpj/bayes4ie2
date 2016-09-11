@@ -54,7 +54,7 @@ for size in size_arms:
     start = end
 ```
 
-![](/assets/test_dist.png)
+![]({{site.url}}/assets/test_dist.png)
 
 This appears to be about what we would expect give our effect sizes.
 

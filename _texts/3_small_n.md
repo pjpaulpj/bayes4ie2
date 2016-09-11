@@ -109,7 +109,7 @@ effect_sim = fit.extract()['effect']
 sns.distplot(effect_sim)
 ```
 
-![](/assets/dist_effect_size.png)
+![]({{site.url}}/assets/dist_effect_size.png)
 
 
 Next, let's calculate the probability that the effect is greater than \\(\delta\\).  For this example, let's assume \\(\delta\\) is equal to .05.  In other words, the other intervention we are comparing our intervention to causes a 5 percentage point increase in the probability of the outcome being a success. 

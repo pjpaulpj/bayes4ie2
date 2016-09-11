@@ -76,7 +76,7 @@ First, let’s take a look at the distribution of our samples of theta
 ```python
 fit.traceplot()
 ```
-![](/assets/binom_traceplot.png)
+![]({{site.url}}/assets/binom_traceplot.png)
 
 Next, let’s estimate the probability that theta is greater than .5. To do this, I first extract the samples using the “extract()” method.
 
