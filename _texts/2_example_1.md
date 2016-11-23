@@ -21,7 +21,7 @@ Now that I’ve offered those disclaimers, I’m going to ignore them for most o
 
 
 ## A simple example 
-Let’s start by getting our hands dirty with a simple example.  Returning to the example from the introduction, let’s suppose we observe 10 tosses from a coin which we don’t whether is fair or not. In the previous example, we assumed that there were only two possible values for \theta, the probability that the coin lands heads up: fair, or .5, and rigged, or .75. Let’s now assume that we don’t really know anything about theta and thus we assume that there is an equal probability that theta is any value between 0 and 1.  A distribution that conforms to this assumption is the beta(1,1) distribution. (This is just a uniform distribution from 0 to 1.)
+Let’s start by getting our hands dirty with a simple example.  Returning to the example from the introduction, let’s suppose we observe 10 tosses from a coin which we don’t whether is fair or not. In the previous example, we assumed that there were only two possible values for theta, the probability that the coin lands heads up: fair, or .5, and rigged, or .75. Let’s now assume that we don’t really know anything about theta and thus we assume that there is an equal probability that theta is any value between 0 and 1.  A distribution that conforms to this assumption is the beta(1,1) distribution. (This is just a uniform distribution from 0 to 1.)
 
 
 ### Step 1 – define the statistical model in Stan

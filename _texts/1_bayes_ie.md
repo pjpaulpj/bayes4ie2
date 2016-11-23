@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Bayesian inference and decision-focused evaluations
+title: Why Bayes makes sense for DFEs
 date: 2016-01-22 15:40:45
 ---
 Here at IDinsight, one of the main services that we offer our clients is what we call "decision-focused evaluations" (DFEs). In contrast to impact evaluations that seek to create general knowledge, such as whether a program “works,” DFEs seek to influence specific decisions, such as whether to implement a program in one way or another.  We call the former type of impact evaluation knowledge focused evaluations (KFEs) to distinguish them from DFEs. (For more on the argument for this distinction, check out [Shah et al]( http://www.3ieimpact.org/media/filer_public/2015/10/01/wp25-evaluations_with_impact.pdf).)
